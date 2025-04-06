@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  room-manager:
+    image: isdockero/onliver-room-manager:latest
+    networks:
+      - service-network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+
+
+networks:
+  service-network:
+    external: true
