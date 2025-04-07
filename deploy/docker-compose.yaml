@@ -3,10 +3,6 @@ version: '3.8'
 services:
   room-manager:
     image: isdockero/onliver-room-manager:latest
-    ports:
-      - target: 8080
-        published: 8081
-        protocol: tcp
     networks:
       - service-network
     deploy:
