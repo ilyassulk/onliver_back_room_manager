@@ -8,6 +8,8 @@ import ru.onliver.room_manager.service.RoomService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @RestController
 @RequestMapping("/room")
@@ -25,6 +28,11 @@ public class RoomController {
 
     public RoomController(RoomService roomService) {
         this.roomService = roomService;
+    }
+
+    @RequestMapping(method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> handleOptions() {
+        return ResponseEntity.ok().allow(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS).build();
     }
 
     /**
@@ -40,6 +48,11 @@ public class RoomController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Не удалось создать комнату: " + e.getMessage());
         }
+    }
+
+    @RequestMapping(method = RequestMethod.OPTIONS, path = "/{roomName}")
+    public ResponseEntity<?> handleOptions(@PathVariable String roomName) {
+        return ResponseEntity.ok().allow(HttpMethod.DELETE, HttpMethod.OPTIONS).build();
     }
 
     /**
