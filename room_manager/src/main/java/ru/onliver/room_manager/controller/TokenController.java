@@ -29,7 +29,7 @@ public class TokenController {
     private String secretKey;
 
     @RequestMapping(method = RequestMethod.OPTIONS)
-    public ResponseEntity<?> handleOptions() {
+    public ResponseEntity<?> handleOptions(@RequestParam String roomName, @RequestParam String participantName) {
         return ResponseEntity.ok().allow(HttpMethod.GET, HttpMethod.OPTIONS).build();
     }
 
