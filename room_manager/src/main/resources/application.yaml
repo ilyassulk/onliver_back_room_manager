@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: room_manager
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@onliver.ru:27017/room-managment?authSource=admin&authMechanism=SCRAM-SHA-256
+
+server:
+  port: 8080
+  ssl:
+    enabled: false
+
+livekit:
+  host: http://onliver.ru:7880
+  apiKey: APIXMCTJEXDBghU
+  secret: laxpDMZwSmNlxvjHzG8YnZsti8ofCMRlY9H6OAL7EeL
