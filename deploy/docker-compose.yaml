@@ -5,10 +5,6 @@ services:
     image: isdockero/onliver-room-manager:latest
     networks:
       - service-network
-    ports:
-      - target: 8080
-        published: 8080
-        protocol: tcp
     deploy:
       replicas: 1
       restart_policy:
