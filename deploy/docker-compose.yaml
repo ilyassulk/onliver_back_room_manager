@@ -4,7 +4,7 @@ services:
   room-manager:
     image: isdockero/onliver-room-manager:latest
     ports:
-      - target: 1234
+      - target: 8080
         published: 1234
         protocol: tcp
     networks:
