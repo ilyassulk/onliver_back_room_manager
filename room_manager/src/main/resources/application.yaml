@@ -11,6 +11,6 @@ server:
     enabled: false
 
 livekit:
-  host: http://onliver.ru:7880
+  host: http://onliver.ru:8080/livekit
   apiKey: APIXMCTJEXDBghU
   secret: laxpDMZwSmNlxvjHzG8YnZsti8ofCMRlY9H6OAL7EeL

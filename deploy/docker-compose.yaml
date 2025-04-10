@@ -3,6 +3,10 @@ version: '3.8'
 services:
   room-manager:
     image: isdockero/onliver-room-manager:latest
+    ports:
+      - target: 1234
+        published: 1234
+        protocol: tcp
     networks:
       - service-network
     deploy:
