@@ -26,7 +26,7 @@ public class LivekitWebhookController {
     }
 
     @PostMapping(
-        path = "/live-kit-webhook",
+        path = "/webhook",
         consumes = "application/webhook+json",
         produces = MediaType.APPLICATION_JSON_VALUE
     )
