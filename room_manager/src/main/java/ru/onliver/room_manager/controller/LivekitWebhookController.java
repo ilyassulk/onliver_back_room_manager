@@ -20,7 +20,7 @@ public class LivekitWebhookController {
 
     public LivekitWebhookController(
             @Value("${livekit.apiKey}") String apiKey,
-            @Value("${livekit.apiSecret}") String apiSecret
+            @Value("${livekit.secret}") String apiSecret
     ) {
         this.webhookReceiver = new WebhookReceiver(apiKey, apiSecret);
     }
