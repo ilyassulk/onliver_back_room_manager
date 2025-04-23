@@ -3,7 +3,7 @@ spring:
     name: room_manager
   data:
     mongodb:
-      uri: mongodb://admin:admin@onliver.ru:27017/room-managment?authSource=admin&authMechanism=SCRAM-SHA-256
+      uri: mongodb://admin:admin@onliver.ru:27017/room?authSource=admin&authMechanism=SCRAM-SHA-256
   kafka:
     bootstrap-servers: kafka:9092
     topic:
