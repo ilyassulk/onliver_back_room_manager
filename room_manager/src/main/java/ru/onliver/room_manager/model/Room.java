@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "room")
 public class Room {
     @Id
-    Long id;
+    String id;
     String name;
 
     public Room(String name) {
