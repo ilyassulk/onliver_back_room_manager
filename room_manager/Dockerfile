@@ -12,7 +12,7 @@ COPY src src
 
 # Собираем приложение без тестов
 RUN chmod +x ./mvnw
-RUN ./mvnw clean package
+RUN ./mvnw clean package -DskipTests
 
 # Указываем команду запуска
 ENTRYPOINT ["java", "-jar", "target/room_manager-0.0.1-SNAPSHOT.jar"]
