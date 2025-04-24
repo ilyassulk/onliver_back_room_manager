@@ -48,7 +48,6 @@ public class LivekitWebhookController {
                 break;
         }
 
-        // Успешный ответ LiveKit: HTTP 200 без тела
         return ResponseEntity.ok().build();
     }
 }

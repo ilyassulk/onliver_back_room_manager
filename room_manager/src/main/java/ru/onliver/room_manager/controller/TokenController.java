@@ -42,7 +42,7 @@ public class TokenController {
         AccessToken token = new AccessToken(liveKitConfig.getApiKey(), liveKitConfig.getApiSecret());
         token.setName(participantName); 
         token.setIdentity(participantName);
-        token.addGrants(new RoomJoin(true), new RoomName(roomName)); 
+        token.addGrants(new RoomJoin(true), new RoomName(roomName));
     
         return ResponseEntity.ok(Map.of("token", token.toJwt()));
     }

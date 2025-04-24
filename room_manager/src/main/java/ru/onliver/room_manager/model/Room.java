@@ -12,4 +12,12 @@ public class Room {
     public Room(String name) {
         this.name = name;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
