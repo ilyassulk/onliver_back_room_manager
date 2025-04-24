@@ -1,9 +1,11 @@
 package ru.onliver.room_manager.config;
 
 import io.livekit.server.WebhookReceiver;
+import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import io.livekit.server.RoomServiceClient;
 
 @Configuration
 public class LiveKitConfig {
@@ -29,5 +31,10 @@ public class LiveKitConfig {
     @Bean
     public WebhookReceiver webhookReceiver() {
         return new WebhookReceiver(apiKey, apiSecret);
+    }
+
+    @Bean
+    public RoomServiceClient roomServiceClient() {
+        return RoomServiceClient.createClient(host, apiKey, apiSecret, () -> new OkHttpClient());
     }
 }
