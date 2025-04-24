@@ -70,19 +70,32 @@ jobs:
     needs: docker
     environment: production
     steps:
-      - name: Stop running stack & clean up
+      # Остановка работающего стека и удаление старого образа
+      - name: Stop running stack and remove old image
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ vars.SERVER_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN  }}
+            echo "Stopping existing stack..."
             sudo docker stack rm onliver_room_manager_stack || true
-            sleep 15
-            sudo rm -rf ~/deploy || true
+            echo "Waiting for the stack to stop..."
 
-      - name: Copy 'deploy' directory to server
+      # Удаляем существующий deploy на сервере с использованием sudo
+      - name: Remove existing deploy on remote host
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ vars.SERVER_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            echo "Удаляем старый deploy с использованием sudo..."
+            sudo rm -rf deploy
+
+      # Передача файла deploy на удалённый сервер
+      - name: Copy 'deploy' Directory to Server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ vars.SERVER_HOST }}
@@ -91,6 +104,7 @@ jobs:
           source: 'deploy/*'
           target: '~/'
 
+      # Подключение по SSH, авторизация в Docker Hub на сервере и деплой нового стека
       - name: Deploy new stack
         uses: appleboy/ssh-action@v0.1.7
         with:
@@ -98,6 +112,9 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-            sudo docker stack deploy --detach=true \
-              -c ~/deploy/docker-compose.yaml onliver_room_manager_stack
+            echo "Logging in to Docker Hub on remote host..."
+            sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN  }}
+            echo "Deploying new stack..."
+            ls
+            sudo docker stack deploy --detach=true -c ~/deploy/docker-compose.yaml onliver_room_manager_stack
+
