@@ -65,4 +65,5 @@ public class RoomController {
         List<Room> rooms = roomService.getRooms();
         return ResponseEntity.ok(rooms.stream().map(Room::getName).collect(Collectors.toList()));
     }
+    // for deploy
 }
